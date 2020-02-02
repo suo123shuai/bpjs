@@ -1,0 +1,61 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	
+		// {
+		// 	"path": "pages/home/home",
+		// 	"style": {
+		// 		"navigationBarTitleText": "首页"
+		// 	}
+		// },
+		
+		// {
+		// 	"path": "pages/qianxian/home",
+		// 	"style": {
+		// 		"navigationBarTitleText": "首页"
+		// 	}
+		// },
+	 //    {
+  //           "path" : "pages/gongchengchaxun/gongchengchaxun",
+  //           "style": {
+		// 		"navigationBarTitleText": "工程查询"
+		// 	}
+		// },
+        {
+            "path" : "pages/map/map",
+            "style" : {
+				"navigationBarTitleText": "地图信息"
+			}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+	//  "tabBar":{
+	// 	"color":"#FFFFFF",
+	// 	"selectedColor":"#007AFF",
+	// 	"list":[{
+	// 		"pagePath": "pages/home/home",
+	// 		"text": "首页"
+	// 	},
+	// 	{
+	// 		"pagePath": "pages/home/home",
+	// 		"text": "物资"
+	// 	},
+	// 	{
+	// 		"pagePath": "pages/home/home",
+	// 		"text": "车辆"
+	// 	},
+	// 	{
+	// 		"pagePath": "pages/home/home",
+	// 		"text": "字典"
+	// 	},
+	// 	{
+	// 		"pagePath": "pages/home/home",
+	// 		"text": "抢险"
+	// 	}
+	// 	]
+	// }
+}
