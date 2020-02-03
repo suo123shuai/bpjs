@@ -28,19 +28,18 @@
 					</view>
 				</view>
 				<view class="flex solid-bottom padding align-start ">
-					<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltolower="chudi"
+					<!-- <scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltolower="chudi"
 							 style="height: 400rpx;background-color: #C8C7CC;" @scroll="scroll">
-						<!-- <div id="con1" ref="con1" class="scroll-view-item uni-bg-red" @mouseenter="mEnter" @mouseleave="mLeave"> -->
-							<div v-for='(item,index) in items' :key="index"  class="scroll-view-item zimo" >中奖人的名字是--{{item.name}}</div>
-						<!-- </div> -->
 					</scroll-view>
 					<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltolower="chudi"
-							 style="height: 400rpx;margin-left: 5rpx;background-color: #C8C7CC;" @scroll="scroll">
-						<!-- <div id="con1" ref="con1" class="scroll-view-item uni-bg-red" @mouseenter="mEnter" @mouseleave="mLeave"> -->
-							<div v-for='(item,index) in items' :key="index"  class="scroll-view-item zimo" >中奖人的名字是--{{item.name}}</div>
-						<!-- </div> -->
-					</scroll-view>
+						 style="height: 400rpx;margin-left: 5rpx;background-color: #C8C7CC;" @scroll="scroll">
+						<div v-for='(item,index) in items' :key="index"  class="scroll-view-item zimo" >中奖人的名字是--{{item.name}}</div>
+					</scroll-view> -->
+					<view class="home" style="height: 400rpx;background-color: #C8C7CC;">
+						<tony-scroll :list="items"></tony-scroll>
+					</view>
 				</view>
+				
 			</view>
 		</view>
 	</view>
@@ -48,13 +47,17 @@
 </template>
 
 <script>
-
+import tonyScroll from '@/components/tony-scroll/tony-scroll.vue'
 	export default {
 		data() {
 			return {
 				title: ['首页','用户维护','用户管理','角色维护','角色菜单维护','组织机构'],
 				TabCur: 0,
-				scrollTop: 0,
+				scrollTop: -1,
+				top:0,
+				old: {
+					scrollTop: 0
+				},
 				scrollLeft: 0,
 				Height: 200,
 				items:[ //消息列表对应的数组
@@ -111,11 +114,22 @@
 			}
 		},
 		onLoad() {
-			
+			this.items = this.items.concat(this.items);
+			// this.lower().then(() => {
+				
+			// });
+			setInterval(this.lower,100)
+			// setInterval(() => {
+			// 	this.$nextTick(function() {
+			// 		this.lower();
+			// 		console.log("wwwwwwwwwww")
+			// 	})
+			// },100)
 		},
 		mounted () {
-		this.items = this.items.concat(this.items)
-		setInterval(this.lower,100)
+		},
+		components: {
+			tonyScroll
 		},
 		methods: {
 			tabSelect(e){
@@ -126,21 +140,46 @@
 	
 				
 			},
+			
 			lower(){
 				// var height=  window.getComputedStyle(this.$refs.scroll1).height;
-				// console.info(height);
+				
+				// setInterval(() => {
+					
+				// },100)
+				// this.scrollTop = 200;
+				// console.log("sssssss")
 				if(this.scrollTop >= this.Height / 2){
-					this.scrollTop = 0
+					console.log("sssssss")
+					this.scrollTop = 0;
+					this.$nextTick(function() {
+						this.scrollTop = 0;
+					})
 				}else {
+					console.log("wwwwwwwww")
+					this.$nextTick(function() {
+						this.scrollTop++;
+					})
 					this.scrollTop++;
 				}
+				
+				// this.$nextTick(function() {
+				// 	if(this.scrollTop >= this.Height / 2){
+				// 		this.scrollTop = 0;
+				// 	}else {
+				// 		this.scrollTop++;
+				// 	}
+				// 	this.scrollTop = 0
+				// });
+				
 			},
 			// chudi(){
 			// 	this.scrollTop = 0;
 			// 	// this.items = this.items.concat(this.items)
 			// },
 			scroll: function(e) {
-				this.Height = e.detail.scrollHeight
+				this.Height = e.detail.scrollHeight;
+				// this.scrollTop = e.detail.scrollTop;
 			},
 		},
 		
