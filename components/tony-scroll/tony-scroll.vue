@@ -5,7 +5,7 @@
 				<view class="lis uni-flex uni-column" :animation="animationData">
 					<view class="uni-flex uni-column" v-for="(item, index) in list" :key="index">
 						<view class="swiper-item item_title uni-flex list_item">
-							<view class="time uni-flex-item justify-align-center uni-flex">{{ item.name }}</view>
+							<view class="time uni-flex-item justify-align-center uni-flex zimo">{{ item.name }}</view>
 							<!-- <view class="phone uni-flex-item justify-align-center uni-flex">{{ item.phone }}</view>
 							<view class="prizes uni-flex-item justify-align-center uni-flex">{{ item.prize }}</view> -->
 						</view>
@@ -44,6 +44,7 @@ export default {
 					this.height = data[0].height;
 				})
 				.exec();
+			// this.height = 200
 		},
 		prizeScroll() {
 			let speed = 50;
@@ -54,7 +55,7 @@ export default {
 			});
 			this.animation = animation;
 			setInterval(() => {
-				if (this.scrollHeight >= this.height) {
+				if (this.scrollHeight >= this.height / 2) {
 					animation.translateY(0).step();
 					this.scrollHeight = 0;
 					this.animationData = animation.export();
@@ -74,7 +75,14 @@ export default {
 		width: 100%;
 	}
 	.home,.list {
-		width: 750upx;
-		padding-top: 30upx;
+		width: 300upx;
+		/* padding-top: 30upx; */
+	}
+	.zimo{
+		margin: 10rpx;
+		padding: 10rpx;
+		border: #FFFFFF solid 1rpx;
+		border-radius: 10rpx;
+		background-color: #FFFFFF;
 	}
 </style>

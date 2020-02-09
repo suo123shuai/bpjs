@@ -30,72 +30,41 @@
 		</view>
 		
 		<view class="example-body">
-			<view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="show('right')"><text class="word-btn-white">显示Drawer</text></view>
+			<!-- <view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @tap="show('right')"><text class="word-btn-white">显示Drawer</text></view>
 			<uni-drawer :visible="showRight" mode="right" @close="closeDrawer('right')">
 				
 				
+			</uni-drawer> -->
+			<view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @tap="show"><text class="word-btn-white">显示Drawer</text></view>
+			<uni-drawer :visible="showRight" mode="right" @close="closeDrawer">
+			    <view style="padding:30rpx;">
+			        <view class="uni-title">抽屉式导航</view>
+			    </view>
 			</uni-drawer>
 		</view>
+		
+		
 	</view>
 </template>
 <script>
 	import uniDrawer from '@/components/uni-drawer/uni-drawer.vue'
-	import uniList from '@/components/uni-list/uni-list.vue'
-	import uniListItem from '@/components/uni-list-item/uni-list-item.vue'
-	import uniSection from '@/components/uni-section/uni-section.vue'
-	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	export default {
 		components: {
-			uniIcons,
 			uniDrawer,
-			uniList,
-			uniListItem,
-			uniSection
 		},
 		data() {
 			return {
 				showRight: false,
-				showLeft: false
 			}
 		},
 		methods: {
-			show(e) {
-				console.log("show", e);
-				if (e === 'left') {
-					this.showLeft = true
-				} else {
-					this.showRight = true
-				}
+			show() {
+				this.showRight = true;
 			},
-			hide() {
-				console.log("hide");
-				this.showLeft = false
-				this.showRight = false
-			},
-			closeDrawer(e) {
-				if (e === 'left') {
-					this.showLeft = false
-				} else {
-					this.showRight = false
-				}
-			},
-			confirm() {
-				
-			},
-			tiao(){
-				
+			closeDrawer(){
+				this.showRight = false;
 			}
 		},
-		onNavigationBarButtonTap(e) {
-			this.showRight = !this.showRight
-		},
-		onBackPress() {
-			if (this.showRight || this.showLeft) {
-				this.hide()
-				return true
-			}
-		}
-		
 	}
 </script>
 

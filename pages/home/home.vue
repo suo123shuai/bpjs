@@ -11,7 +11,7 @@
 			</view>
 		</view>
 		<view class="cu-list grid col-4 no-border">
-			<view class="cu-time"  v-for="(item,index) in iconList" :key="index" @tap="alt">
+			<view class="cu-time"  v-for="(item,index) in iconList" :key="index" @tap="alt" :data-tabc="item">
 				<image class="logo" :src="item.icon"></image>
 			</view>
 		</view> 
@@ -38,6 +38,9 @@
 					<view class="home" style="height: 400rpx;background-color: #C8C7CC;">
 						<tony-scroll :list="items"></tony-scroll>
 					</view>
+					<view class="home" style="height: 400rpx;background-color: #C8C7CC;margin-left: 20rpx">
+						<tony-scroll :list="items"></tony-scroll>
+					</view>
 				</view>
 				
 			</view>
@@ -47,7 +50,8 @@
 </template>
 
 <script>
-import tonyScroll from '@/components/tony-scroll/tony-scroll.vue'
+import tonyScroll from '@/components/tony-scroll/tony-scroll.vue';
+    var that;
 	export default {
 		data() {
 			return {
@@ -73,7 +77,8 @@ import tonyScroll from '@/components/tony-scroll/tony-scroll.vue'
 				 iconList: [{
 				      icon: require("../../static/home/qiangxiangongcheng.png"),
 				      color: 'red',
-				      name: '抢险工程'
+				      name: '抢险工程',
+					  url:'qianxian'
 				    }, {
 				      icon: require("../../static/home/wuliaoxinxi.png"),
 				      color: 'orange',
@@ -114,11 +119,12 @@ import tonyScroll from '@/components/tony-scroll/tony-scroll.vue'
 			}
 		},
 		onLoad() {
-			this.items = this.items.concat(this.items);
+			that = this;
+			// this.items = this.items.concat(this.items);
 			// this.lower().then(() => {
 				
 			// });
-			setInterval(this.lower,100)
+			// setInterval(this.lower,100)
 			// setInterval(() => {
 			// 	this.$nextTick(function() {
 			// 		this.lower();
@@ -137,52 +143,15 @@ import tonyScroll from '@/components/tony-scroll/tony-scroll.vue'
 				this.scrollLeft = (e.currentTarget.dataset.id - 1) * 100
 			},
 			alt(e){
-	
-				
-			},
-			
-			lower(){
-				// var height=  window.getComputedStyle(this.$refs.scroll1).height;
-				
-				// setInterval(() => {
-					
-				// },100)
-				// this.scrollTop = 200;
-				// console.log("sssssss")
-				if(this.scrollTop >= this.Height / 2){
-					console.log("sssssss")
-					this.scrollTop = 0;
-					this.$nextTick(function() {
-						this.scrollTop = 0;
-					})
-				}else {
-					console.log("wwwwwwwww")
-					this.$nextTick(function() {
-						this.scrollTop++;
-					})
-					this.scrollTop++;
-				}
-				
-				// this.$nextTick(function() {
-				// 	if(this.scrollTop >= this.Height / 2){
-				// 		this.scrollTop = 0;
-				// 	}else {
-				// 		this.scrollTop++;
-				// 	}
-				// 	this.scrollTop = 0
-				// });
-				
-			},
-			// chudi(){
-			// 	this.scrollTop = 0;
-			// 	// this.items = this.items.concat(this.items)
-			// },
-			scroll: function(e) {
-				this.Height = e.detail.scrollHeight;
-				// this.scrollTop = e.detail.scrollTop;
+				console.log(e)
+				uni.navigateTo({
+				    url: '/pages/'+e.currentTarget.dataset.tabc.url+'/home'
+				});
 			},
 		},
-		
+		onShow:function(){
+			that.items = that.items.concat(that.items);
+		}
 	}
 </script>
 
@@ -197,6 +166,9 @@ import tonyScroll from '@/components/tony-scroll/tony-scroll.vue'
 		border: #FFFFFF solid 1rpx;
 		border-radius: 10rpx;
 		background-color: #FFFFFF;
+	}
+	.home{
+		overflow:hidden;
 	}
 	
 </style>
