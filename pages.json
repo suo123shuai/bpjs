@@ -17,7 +17,8 @@
 	    {
             "path" : "pages/gongchengchaxun/gongchengchaxun",
             "style": {
-				"navigationBarTitleText": "工程查询"
+				"navigationBarTitleText": "工程查询",
+				"navigationStyle": "custom"
 			}
 		},
         {

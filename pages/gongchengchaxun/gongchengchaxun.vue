@@ -1,10 +1,16 @@
 <template>
 	<view>
-		<scroll-view scroll-x class="bg-white nav text-center">
+		<!-- <view class="example-body"> -->
+			<!-- <uni-nav-bar left-icon="arrowleft" right-text="菜单" left-text="返回" title="标题" @clickLeft="back" :fixed="true" :status-bar="true"/> -->
+		<!-- </view> -->
+		<view class="example-body">
+			<uni-nav-bar background-color="#F8F8F8" :status-bar="true" right-text="搜索" left-icon="arrowleft"  title="工程查询" @clickLeft="back" style="font-size:10rpx" @clickRight="open"/>
+		</view>
+		<!-- <scroll-view scroll-x class="bg-white nav text-center">
 		  <view class="cu-item text-blue cur" v-for="(item, index) in 3" :key="index" @tap="tabSelect">
 		    Tab{{index}}
 		  </view>
-		</scroll-view>
+		</scroll-view> -->
 		<view class="fenkuai" @tap="tiao" >
 			<view>
 				管网分公司:管网一分
@@ -29,40 +35,136 @@
 			</view> -->
 		</view>
 		
-		<view class="example-body">
-			<!-- <view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @tap="show('right')"><text class="word-btn-white">显示Drawer</text></view>
-			<uni-drawer :visible="showRight" mode="right" @close="closeDrawer('right')">
+		<view class="cehua">
+			<hj-dragabledrawer :options="options" ref="dragBox" @open="afterOpen" @close="afterClose">
+				<!-- <button @tap="hello">hi</button> -->
+				<view @tap="close" style="white:10rpx;height:50rpx;margin-top: 50rpx;margin-left: 50rpx;">
+					x
+				</view>
+				<view style="margin-top: 50rpx;"> 
+					<form @submit="formsu" @reset="re">
+						<view class="input-view">
+							<label class="la">管网分公司:</label>
+							<view class="input">
+								<input name="guanwan"  />
+							</view>
+						</view>
+						<view class="input-view">
+							<label class="la">工程名称:</label>
+							<view class="input">
+								<input name="guanwan"  />
+							</view>
+						</view>
+						<view class="input-view">
+							<label class="la">项目部:</label>
+							<view class="input">
+								<input name="guanwan"  />
+							</view>
+						</view>
+						<view class="input-view">
+							<label class="la">工程状态:</label>
+							<view class="input">
+								<input name="guanwan"  />
+							</view>
+						</view>
+						<view class="input-view">
+							<label class="la">性质:</label>
+							<view class="input">
+								<input name="guanwan"  />
+							</view>
+						</view>
+						<view class="input-view">
+							<label class="la">管径(mm):</label>
+							<view class="input">
+								<input name="guanwan"  />
+							</view>
+						</view>
+						<view class="input-view">
+							<label class="la">事故原因:</label>
+							<view class="input">
+								<input name="guanwan"  />
+							</view>
+						</view>
+						<view class="input-view">
+							<label class="la">施工方案:</label>
+							<view class="input">
+								<input name="guanwan"  />
+							</view>
+						</view>
+					</form>
+				</view>
 				
-				
-			</uni-drawer> -->
-			<view class="word-btn draw-cotrol-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @tap="show"><text class="word-btn-white">显示Drawer</text></view>
-			<uni-drawer :visible="showRight" mode="right" @close="closeDrawer">
-			    <view style="padding:30rpx;">
-			        <view class="uni-title">抽屉式导航</view>
-			    </view>
-			</uni-drawer>
+				<button @tap="close">关闭</button>
+			</hj-dragabledrawer>
+			<!-- <button @tap="open">打开</button> -->
 		</view>
-		
-		
 	</view>
 </template>
 <script>
 	import uniDrawer from '@/components/uni-drawer/uni-drawer.vue'
+	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
+	import hjDragabledrawer from '@/components/hj-dragabledrawer/hj-dragabledrawer.vue' //这里修改下插件的相对路径
+	let dragBox;
 	export default {
 		components: {
 			uniDrawer,
+			hjDragabledrawer,
+			uniNavBar,
 		},
 		data() {
 			return {
 				showRight: false,
+				options: {
+					visible: false,
+					rightMode: true,
+					autoClose: false
+				}
 			}
 		},
+		onReady() {
+			dragBox = this.$refs.dragBox;
+		},
 		methods: {
-			show() {
-				this.showRight = true;
+			// show() {
+			// 	this.showRight = true;
+			// },
+			// closeDrawer(){
+			// 	this.showRight = false;
+			// },
+			open() {
+				dragBox.open()
 			},
-			closeDrawer(){
-				this.showRight = false;
+			// hello() {
+			// 	uni.showToast({
+			// 		title: 'hello',
+			// 		icon: 'none',
+			// 	});
+			// },
+			close(){
+				dragBox.close()
+			},
+			toggle() {
+				this.options.rightMode = !this.options.rightMode
+			},
+			toggle1() {
+				this.options.autoClose = !this.options.autoClose
+			},
+			// afterOpen() {
+			// 	uni.showToast({
+			// 		title: 'open',
+			// 		icon: 'none',
+			// 	});
+			// },
+			// afterClose() {
+			// 	uni.showToast({
+			// 		title: 'close',
+			// 		icon: 'none',
+			// 	});
+			// },
+			back(){
+				uni.navigateBack({
+				    delta: 1
+				});
 			}
 		},
 	}
@@ -94,6 +196,12 @@
 		font-size: 28rpx;
 		line-height: inherit;
 	}
+	.la{
+		width: 40%;text-align:right;line-height: 50rpx;
+	}
+	.cehua{
+		height: 80%;
+	}
 	.fenkuai{
 		width: 98%;
 		margin-left: 1%;
@@ -123,6 +231,7 @@
 		padding: 0;
 		font-size: 14rpx;
 		background-color: #ffffff;
+		
 	}
 
 	/* #endif */
@@ -146,9 +255,13 @@
 	}
 
 
+
 	.example-body {
-		flex-direction: column;
-		padding: 30rpx;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		padding: 0;
+		font-size: 4rpx;
 		background-color: #ffffff;
 	}
 
@@ -192,14 +305,16 @@
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-		align-items: center;
+		
 		flex-direction: row;
-		background-color: #e7e7e7;
+		height: 100rpx;
+		
+		/* background-color: #e7e7e7;
 		height: 30px;
 		border-radius: 15px;
 		padding: 0 10px;
 		flex: 1;
-		background-color: #f5f5f5;
+		background-color: #f5f5f5; */
 	}
 
 	.uni-drawer-info {
@@ -215,12 +330,16 @@
 	}
 
 	.input {
-		flex: 1;
+		/* flex: 1;
 		padding: 0 5px;
 		height: 24px;
 		line-height: 24px;
 		font-size: 28rpx;
-		background-color: transparent;
+		background-color: transparent; */
+		width: 50%;
+		height: 50rpx;
+		border: #EBEEF5 solid 2rpx;
+		margin-left: 20rpx;
 	}
 
 	.close {
