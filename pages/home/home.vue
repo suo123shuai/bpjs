@@ -28,13 +28,7 @@
 					</view>
 				</view>
 				<view class="flex solid-bottom padding align-start ">
-					<!-- <scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltolower="chudi"
-							 style="height: 400rpx;background-color: #C8C7CC;" @scroll="scroll">
-					</scroll-view>
-					<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltolower="chudi"
-						 style="height: 400rpx;margin-left: 5rpx;background-color: #C8C7CC;" @scroll="scroll">
-						<div v-for='(item,index) in items' :key="index"  class="scroll-view-item zimo" >中奖人的名字是--{{item.name}}</div>
-					</scroll-view> -->
+					
 					<view class="home" style="height: 400rpx;background-color: #C8C7CC;">
 						<tony-scroll :list="items"></tony-scroll>
 					</view>
